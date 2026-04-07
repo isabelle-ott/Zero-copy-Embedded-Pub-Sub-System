@@ -1,0 +1,3 @@
+[submodule "Micro-PubSub_test/third_party/Unity"]
+	path = Micro-PubSub_test/third_party/Unity
+	url = https://github.com/ThrowTheSwitch/Unity.git
