@@ -1,0 +1,20 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/src/mem_pool.c" "CMakeFiles/middleware_lib.dir/middleware/src/mem_pool.c.o" "gcc" "CMakeFiles/middleware_lib.dir/middleware/src/mem_pool.c.o.d"
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/src/topic_tree.c" "CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o" "gcc" "CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o.d"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

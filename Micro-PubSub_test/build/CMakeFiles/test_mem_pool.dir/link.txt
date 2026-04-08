@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/test_mem_pool.dir/test/test_mem_pool.c.o -o test_mem_pool  libmiddleware_lib.a libunity_lib.a 

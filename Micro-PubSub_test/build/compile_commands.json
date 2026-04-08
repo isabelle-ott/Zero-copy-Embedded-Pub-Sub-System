@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/build",
+  "command": "/usr/bin/cc -DTEST -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/include -std=gnu11 -o CMakeFiles/middleware_lib.dir/middleware/src/mem_pool.c.o -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/src/mem_pool.c",
+  "file": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/src/mem_pool.c"
+},
+{
+  "directory": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/build",
+  "command": "/usr/bin/cc -DTEST -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/include -std=gnu11 -o CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/src/topic_tree.c",
+  "file": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/src/topic_tree.c"
+},
+{
+  "directory": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/build",
+  "command": "/usr/bin/cc -DTEST -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/third_party/Unity/src -std=gnu11 -o CMakeFiles/unity_lib.dir/third_party/Unity/src/unity.c.o -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/third_party/Unity/src/unity.c",
+  "file": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/third_party/Unity/src/unity.c"
+},
+{
+  "directory": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/build",
+  "command": "/usr/bin/cc -DTEST -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/include -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/third_party/Unity/src -std=gnu11 -o CMakeFiles/test_mem_pool.dir/test/test_mem_pool.c.o -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/test/test_mem_pool.c",
+  "file": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/test/test_mem_pool.c"
+},
+{
+  "directory": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/build",
+  "command": "/usr/bin/cc -DTEST -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/include -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/third_party/Unity/src -std=gnu11 -o CMakeFiles/test_topic_tree.dir/test/test_topic_tree.c.o -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/test/test_topic_tree.c",
+  "file": "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/test/test_topic_tree.c"
+}
+]
