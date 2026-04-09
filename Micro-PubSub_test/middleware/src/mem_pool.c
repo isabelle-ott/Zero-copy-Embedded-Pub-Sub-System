@@ -11,6 +11,26 @@
 #include <stddef.h>
 #include <string.h>
 
+/* ================== 跨平台 RTOS 接口适配 ================== */
+#ifdef TEST  // 如果是 Unity 单元测试环境
+    #include <unistd.h>
+    
+    // 在 Linux 测试环境下，将 FreeRTOS 的 Tick 转换宏 mock 掉
+    #define pdMS_TO_TICKS(ms) (ms)
+    
+    // 在 Linux 测试环境下，用 usleep 替代 vTaskDelay
+    #define vTaskDelay(ms) usleep((ms) * 1000) 
+
+    // 【新增】：PC 测试是单线程的，直接将临界区屏蔽掉
+    // 使用 do {} while(0) 是为了保证宏展开时语法的绝对安全
+    #define taskENTER_CRITICAL() do {} while(0)
+    #define taskEXIT_CRITICAL()  do {} while(0)
+
+#else       // 真实的单片机环境
+    #include "FreeRTOS.h"
+    #include "task.h"
+#endif
+/* ========================================================= */
 /* -----------------------------------------------------------------------
  * 内部辅助函数 — 块索引 ↔ 指针转换
  * --------------------------------------------------------------------- */
@@ -67,87 +87,89 @@ static inline int32_t _ptr_to_idx(MemPool_t *pool, void *ptr)
 
 void mps_init(MemPool_t *pool)
 {
-    /*
-     * TODO:
-     *  设置 pool->bitmap，使得每个有效块的位都是 1（空闲）。
-     *
-     *  关键见解: 如果 MPS_BLOCK_COUNT == 32，你需要设置所有 32 位
-     *  （0xFFFFFFFF）。如果 MPS_BLOCK_COUNT < 32，则只应设置低 N 位
-     *  —— 未使用的高位必须保持 0，以便 __builtin_clz() 找到
-     *  真实块，而不是虚幻的块。
-     *
-     *  提示: (1u << MPS_BLOCK_COUNT) - 1u 适用于 N < 32，
-     *        但 N == 32 时会溢出。处理两种情况。
-     */
+    // 一次清零整个结构体
+    memset(pool, 0, sizeof(MemPool_t));
+
+    // 只设置 bitmap（所有块初始为空闲）
     if (MPS_BLOCK_COUNT == 32) {
         pool->bitmap = 0xFFFFFFFFu;
     } else {
         pool->bitmap = (1u << MPS_BLOCK_COUNT) - 1u;
     }
-
-    memset(pool->ref_count, 0, sizeof(pool->ref_count));
 }
 
 /* -----------------------------------------------------------------------
  * mps_alloc
  * --------------------------------------------------------------------- */
 
-void *mps_alloc(MemPool_t *pool)
+MpsStatus_t mps_alloc(MemPool_t *pool, MpsHandle_t *out)
 {
-    /*1表示空闲块*/
-    /* ---- 必须首先执行: 防护 __builtin_clz(0) 未定义行为 ---- */
-    if (pool->bitmap == 0u) {
-        return NULL;    /* 池已满 */
+    MpsStatus_t status = MPS_ERR_FULL;
+
+    taskENTER_CRITICAL();
+
+    if (pool->bitmap != 0u) {
+        uint32_t idx = 31u - __builtin_clz(pool->bitmap);
+
+        pool->bitmap          &= ~(1u << idx);
+        pool->ref_count[idx]   = 1;
+        pool->generation[idx]++;            /* 代数递增，uint8 自然溢出 */
+
+        out->ptr        = _block_ptr(pool, idx);
+        out->generation = pool->generation[idx]; /* 快照写入句柄 */
+        out->idx        = (int32_t)idx;
+
+        status = MPS_OK;
     }
 
-    /*
-     * TODO:
-     *  1. 使用 __builtin_clz(pool->bitmap) 查找最高设置位的索引（= 空闲块）。
-     *     __builtin_clz 返回前导零的数量，因此：
-     *         idx = 31 - __builtin_clz(pool->bitmap)
-     *
-     *  2. 清除 pool->bitmap 中该位以标记块正在使用中。
-     *     提示: pool->bitmap &= ~(1u << idx)
-     *
-     *  3. 返回该块索引的指针。
-     */
-    uint32_t idx = 31 - __builtin_clz(pool->bitmap);
-    pool->bitmap &= ~(1u << idx);
-
-    pool->ref_count[idx] = 1;
-
-    return _block_ptr(pool, idx);
+    taskEXIT_CRITICAL();
+    return status;
 }
 
 /* -----------------------------------------------------------------------
  * mps_free
  * --------------------------------------------------------------------- */
 
-MpsStatus_t mps_free(MemPool_t *pool, void *ptr)
+MpsStatus_t mps_free(MemPool_t *pool, MpsHandle_t *handle)
 {
-    int32_t idx = _ptr_to_idx(pool, ptr);
-    if (idx == -1) {
+    if (!handle || !handle->ptr) {
         return MPS_ERR_INVALID;
     }
-    
-    // 检查块是否已在使用中（位应为 0）
+
+    int32_t idx = _ptr_to_idx(pool, handle->ptr);
+    if (idx == -1 || idx != handle->idx) {   /* 地址 + 索引双重合法性 */
+        return MPS_ERR_INVALID;
+    }
+
+    MpsStatus_t status = MPS_OK;
+    taskENTER_CRITICAL();
+
+    /* 第一道：代数校验 —— 你原版没有这道，这是唯一的新增逻辑 */
+    if (pool->generation[idx] != handle->generation) {
+        status = MPS_ERR_STALE;             /* ABA：块已被重新分配过 */
+        goto done;
+    }
+
+    /* 第二道：bitmap（与你原版完全一致） */
     if ((pool->bitmap & (1u << idx)) == 0) {
-        
-        // [修改核心逻辑]：递减引用计数
-        if (pool->ref_count[idx] > 0) {
-            pool->ref_count[idx]--;
-        }
-        
-        // 只有当所有订阅者和发布者都调用了 free，计数归 0 时，才真正回收物理内存块
+
+        /* 第三道：引用计数健康校验（与你原版完全一致） */
         if (pool->ref_count[idx] == 0) {
-            pool->bitmap |= (1u << idx);
+            status = MPS_ERR_INVALID;       /* 状态撕裂 */
+        } else {
+            pool->ref_count[idx]--;
+            if (pool->ref_count[idx] == 0) {
+                pool->bitmap |= (1u << idx);
+                handle->ptr   = NULL;       /* 主动置空，让野指针更早暴露 */
+            }
         }
-        
-        return MPS_OK;
     } else {
-        // 块已经是空闲状态，属于异常的双重释放
-        return MPS_ERR_INVALID;
+        status = MPS_ERR_INVALID;           /* 双重释放 */
     }
+
+done:
+    taskEXIT_CRITICAL();
+    return status;
 }
 
 /* -----------------------------------------------------------------------
@@ -167,18 +189,37 @@ uint32_t mps_free_count(const MemPool_t *pool)
 /* -----------------------------------------------------------------------
  * mps_add_ref
  * --------------------------------------------------------------------- */
-void mps_add_ref(MemPool_t *pool, void *ptr)
+MpsStatus_t mps_add_ref(MemPool_t *pool, MpsHandle_t *handle)
 {
-    int32_t idx = _ptr_to_idx(pool, ptr);
-    if (idx == -1) {
-        return; // 无效指针，静默防御
+    if (!handle || !handle->ptr) {
+        return MPS_ERR_INVALID;
     }
-
-    // 必须确保该块确实正在被使用中 (对应位为0)
-    if ((pool->bitmap & (1u << idx)) == 0) {
-        // 防止 uint8_t 溢出（虽然你的系统最多 8 个订阅者，但防御要严密）
-        if (pool->ref_count[idx] < 255) {
-            pool->ref_count[idx]++;
-        }
+    
+    int32_t idx = _ptr_to_idx(pool, handle->ptr);
+    if (idx == -1 || idx != handle->idx) {
+        return MPS_ERR_INVALID;
     }
+    
+    MpsStatus_t status = MPS_OK;
+    taskENTER_CRITICAL();
+    
+    //优先级 1：块状态检查（bitmap 是基础事实）
+    if ((pool->bitmap & (1u << idx)) != 0) {
+        // bitmap=1 表示块已释放
+        status = MPS_ERR_INVALID;
+    }
+    //优先级 2：ABA 防护（块已分配，但是否是你这个版本？）
+    else if (pool->generation[idx] != handle->generation) {
+        status = MPS_ERR_STALE;
+    }
+    //优先级 3：引用计数溢出
+    else if (pool->ref_count[idx] < 255u) {
+        pool->ref_count[idx]++;
+    }
+    else {
+        status = MPS_ERR_REF_OVERFLOW;
+    }
+    
+    taskEXIT_CRITICAL();
+    return status;
 }

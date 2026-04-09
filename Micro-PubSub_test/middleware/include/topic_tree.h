@@ -1,4 +1,3 @@
-//必看，所有使用者必须遵循：所有订阅者在消费完 payload 后，必须主动调用 mps_free(pool, payload)，不论是同步还是异步
 #ifndef TOPIC_TREE_H
 #define TOPIC_TREE_H
 
@@ -7,10 +6,20 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#ifndef Topic_Lock
+    #define Topic_Lock(topic)   do {} while(0)
+#endif
+
+#ifndef Topic_Unlock
+    #define Topic_Unlock(topic) do {} while(0)
+#endif
+
 /* 系统级容量限制（体现内存可预测性） */
 #define MAX_TOPICS 16
 #define MAX_SUBSCRIBERS_PER_TOPIC 8
 #define TOPIC_NAME_MAX_LEN 32
+/* 控制流申请内存的最大阻塞超时时间 (Ticks) */
+#define MAX_CTRL_ALLOC_RETRY 10
 
 /* QoS 等级枚举：完全对应你的设计需求 */
 typedef enum {
@@ -20,12 +29,12 @@ typedef enum {
 } QoS_Level_t;
 
 /* 订阅者回调函数签名，基于零拷贝设计，直接传递内存池区块指针 [cite: 25] */
-typedef void (*PubSubCallback_t)(const void* payload);
+typedef void (*TopicCallback_t)(MpsHandle_t* payload);
 
 /* 订阅者节点（静态链表元素） */
 typedef struct {
     bool is_used;
-    PubSubCallback_t callback;
+    TopicCallback_t callback;
     // TODO: 如果你需要维护链表关系，可以在此添加 next 索引 (uint8_t next_idx)
 } SubscriberNode_t;
 
@@ -45,13 +54,13 @@ typedef struct {
 /* 核心 API 声明 */
 void TopicTree_Init(MemPool_t *pool_ptr);
 bool Topic_Register(const char* topic_name, QoS_Level_t qos);
-bool Topic_Subscribe(const char* topic_name, PubSubCallback_t callback);
-bool Topic_Publish(const char* topic_name, const void* payload);
+bool Topic_Subscribe(const char* topic_name, TopicCallback_t callback);
+bool Topic_Publish(const char* topic_name, MpsHandle_t* payload);
 
 // 将外部实例化好的内存池指针传入路由树
 
 
 // 新增：向指定 Topic 申请 Payload 内存的 API
-void* Topic_AllocPayload(const char* topic_name);
+MpsStatus_t Topic_AllocPayload(const char* topic_name, MpsHandle_t *out);
 
 #endif // TOPIC_TREE_H

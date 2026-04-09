@@ -42,22 +42,11 @@
  * --------------------------------------------------------------------- */
 
 typedef struct {
-    /**
-     * 空闲块的位图。
-     * 位 N == 1  → 块 N 可用。
-     * 位 N == 0  → 块 N 正在使用中。
-     *
-     * 初始完全设置：所有块都空闲。
-     * 通过 __builtin_clz() 在强制的池满保护（位图 == 0）后找到 1 位位置。
-     */
     uint32_t bitmap;
-
-    /** 后备存储。aligned(4) 防止 ARM HardFault 在 uint32 访问上。 */
-    uint8_t  storage[MPS_BLOCK_COUNT][MPS_BLOCK_SIZE]   //二维数组
-                    __attribute__((aligned(4)));        //强制整个数组u在内存中按4字节边界对齐
-                    //如果不四字节对齐，有可能会触发HardFault或者有不必要的周期
-    uint8_t  ref_count[MPS_BLOCK_COUNT]; //用来感知这一块内存有多少人在使用
-
+    uint8_t  storage[MPS_BLOCK_COUNT][MPS_BLOCK_SIZE]
+             __attribute__((aligned(4)));
+    uint8_t  ref_count[MPS_BLOCK_COUNT];
+    uint8_t  generation[MPS_BLOCK_COUNT]; /* 新增：每块分配代数 */
 } MemPool_t;
 
 /* -----------------------------------------------------------------------
@@ -66,9 +55,18 @@ typedef struct {
 
 typedef enum {
     MPS_OK          =  0,
-    MPS_ERR_FULL    = -1,   /**< 池已耗尽 — 分配返回 NULL */
-    MPS_ERR_INVALID = -2,   /**< 指针不在池存储范围内 */
+    MPS_ERR_FULL    = -1,
+    MPS_ERR_INVALID = -2,
+    MPS_ERR_STALE   = -3,   /* 新增：代数不匹配，ABA 拦截 */
+    MPS_ERR_REF_OVERFLOW = -4, /* 新增：引用计数溢出 */
+    MPS_ERR_NOT_FOUND = -5  /* 新增：未找到 Topic */
 } MpsStatus_t;
+
+typedef struct {
+    void    *ptr;
+    uint16_t  generation; /* 分配时的代数快照 */
+    int32_t  idx;        /* 块索引，加速校验 */
+} MpsHandle_t;
 
 /* -----------------------------------------------------------------------
  * 公共 API
@@ -90,7 +88,7 @@ void mps_init(MemPool_t *pool);
  * @return      指向 MPS_BLOCK_SIZE 字节、4 字节对齐块的指针，
  *              或者如果池满则返回 NULL。
  */
-void *mps_alloc(MemPool_t *pool);
+MpsStatus_t mps_alloc(MemPool_t *pool, MpsHandle_t *out);
 
 /**
  * @brief 在 O(1) 时间内释放先前分配的块。
@@ -99,7 +97,7 @@ void *mps_alloc(MemPool_t *pool);
  * @param ptr   由 mps_alloc() 返回的指针。
  * @return      成功时返回 MPS_OK，如果 ptr 超出范围则返回 MPS_ERR_INVALID。
  */
-MpsStatus_t mps_free(MemPool_t *pool, void *ptr);
+MpsStatus_t mps_free(MemPool_t *pool, MpsHandle_t *handle);
 
 /**
  * @brief 返回剩余空闲块的数量。
@@ -113,7 +111,16 @@ uint32_t mps_free_count(const MemPool_t *pool);
  * @param pool  从中分配块的池。
  * @param ptr   由 mps_alloc() 返回的有效指针。
  */
-void mps_add_ref(MemPool_t *pool, void *ptr);
+MpsStatus_t mps_add_ref(MemPool_t *pool, MpsHandle_t *handle);
 
 
 #endif /* MEM_POOL_H */
+
+
+
+
+
+
+
+
+

@@ -10,28 +10,24 @@ static int g_callback_call_count = 0;
 static MemPool_t test_pool;
 
 /* 测试用的回调函数 */
-void DummyCallback1(const void* payload) {
+void DummyCallback1(MpsHandle_t *payload) {
     if (payload != NULL) {
-        g_mock_received_value = *(const int*)payload;
+        g_mock_received_value = *(const int*)(payload->ptr);
     }
     g_callback_call_count++;
+    mps_free(&test_pool, payload); // 模拟订阅者消费完 payload 后调用 free
 }
 
-void DummyCallback2(const void* payload) {
+void DummyCallback2(MpsHandle_t *payload) {
     g_callback_call_count++; // 用于测试多订阅者分发
+    mps_free(&test_pool, payload);
 }
-
-/* 每次测试前执行 */
-#include "unity.h"
-#include "mem_pool.h"
-#include "topic_tree.h"
 
 
 void setUp(void) {
-    // 1. 初始化内存池（内部自带存储区并会自动清空位图和引用计数）
+    g_mock_received_value = 0;
+    g_callback_call_count = 0;
     mps_init(&test_pool);
-
-    // 2. 用初始化好的内存池指针来初始化 Topic Tree
     TopicTree_Init(&test_pool);
 }
 
@@ -52,21 +48,37 @@ void test_TopicRegistration(void) {
 
 /* 重点测试 2：精准遍历与分发（回调函数触发验证） */
 void test_PublishDispatch(void) {
-    int test_data = 1024;
-    
+
+    g_callback_call_count = 0;
+    g_mock_received_value = 0;
+
     Topic_Register("/test/data", QOS_LOG);
     Topic_Subscribe("/test/data", DummyCallback1);
     Topic_Subscribe("/test/data", DummyCallback2);
-    
-    // 执行发布
-    bool pub_result = Topic_Publish("/test/data", &test_data);
-    
-    // 验证结果
+
+    uint32_t free_blocks_before = mps_free_count(&test_pool);
+
+    MpsHandle_t h;
+    TEST_ASSERT_EQUAL(MPS_OK, Topic_AllocPayload("/test/data", &h));
+    TEST_ASSERT_NOT_NULL(h.ptr);
+
+    int *payload = (int*)h.ptr;
+
+    *payload = 1024;
+
+    bool pub_result = Topic_Publish("/test/data", &h);
+
     TEST_ASSERT_TRUE(pub_result);
-    // 两个订阅者，所以应该被调用两次
-    TEST_ASSERT_EQUAL(2, g_callback_call_count); 
-    // 验证数据正确传递（零拷贝的指针传递效果）
+    TEST_ASSERT_EQUAL(2, g_callback_call_count);
     TEST_ASSERT_EQUAL(1024, g_mock_received_value);
+
+    uint32_t free_blocks_after = mps_free_count(&test_pool);
+
+    TEST_ASSERT_EQUAL_UINT32_MESSAGE(
+        free_blocks_before,
+        free_blocks_after,
+        "内存泄漏！发布完成后内存块没有被正确回收"
+    );
 }
 
 /* 重点测试 3：QoS 行为预演验证 */
