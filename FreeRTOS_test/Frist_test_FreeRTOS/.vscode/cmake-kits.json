@@ -1,0 +1,10 @@
+[
+  {
+    "name": "STM32F407 GCC",
+    "compilers": {
+      "C": "/usr/bin/arm-none-eabi-gcc",
+      "CXX": "/usr/bin/arm-none-eabi-g++"
+    },
+    "isTrusted": true
+  }
+]
