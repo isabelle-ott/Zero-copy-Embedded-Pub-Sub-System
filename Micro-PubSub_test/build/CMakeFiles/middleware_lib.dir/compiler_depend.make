@@ -25,14 +25,7 @@ CMakeFiles/middleware_lib.dir/middleware/src/mem_pool.c.o: ../middleware/src/mem
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
-  /usr/include/strings.h \
-  /usr/include/unistd.h \
-  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
-  /usr/include/x86_64-linux-gnu/bits/environments.h \
-  /usr/include/x86_64-linux-gnu/bits/confname.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h
+  /usr/include/strings.h
 
 CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o: ../middleware/src/topic_tree.c \
   /usr/include/stdc-predef.h \
@@ -57,12 +50,11 @@ CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o: ../middleware/src/t
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
-  ../middleware/include/mem_pool.h \
+  /usr/include/assert.h \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/strings.h \
-  /usr/include/assert.h \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
@@ -72,23 +64,19 @@ CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o: ../middleware/src/t
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h
 
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
-
-../middleware/src/topic_tree.c:
-
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
 /usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
 
-/usr/include/x86_64-linux-gnu/bits/long-double.h:
+/usr/include/x86_64-linux-gnu/bits/environments.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
-../middleware/include/topic_tree.h:
+/usr/include/unistd.h:
 
-/usr/include/features-time64.h:
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
 
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
 
@@ -99,6 +87,8 @@ CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o: ../middleware/src/t
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
@@ -115,6 +105,12 @@ CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o: ../middleware/src/t
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
 /usr/include/features.h:
+
+../middleware/src/topic_tree.c:
+
+/usr/include/features-time64.h:
+
+../middleware/include/topic_tree.h:
 
 ../middleware/src/mem_pool.c:
 
@@ -139,7 +135,3 @@ CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o: ../middleware/src/t
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
 /usr/include/strings.h:
-
-/usr/include/unistd.h:
-
-/usr/include/x86_64-linux-gnu/bits/environments.h:

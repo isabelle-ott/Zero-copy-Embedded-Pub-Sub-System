@@ -176,6 +176,32 @@
       "bases:新建数据库": false
     }
   },
-  "active": "03405a9992bbeaa2",
-  "lastOpenFiles": []
+  "active": "006ec5b98365b7ff",
+  "lastOpenFiles": [
+    "Micro-PubSub_test/third_party/Unity/extras/fixture/test/main/AllTests.c",
+    "Micro-PubSub_test/third_party/Unity/examples/example_4/test/test_runners/meson.build",
+    "Micro-PubSub_test/third_party/Unity/examples/example_4/test/test_runners/TestProductionCode_Runner.c",
+    "Micro-PubSub_test/third_party/Unity/examples/example_4/test/test_runners/TestProductionCode2_Runner.c",
+    "Micro-PubSub_test/third_party/Unity/examples/example_5/test/test_runners/TestProductionCode_Runner.c",
+    "Micro-PubSub_test/third_party/Unity/examples/example_1/test/test_runners/TestProductionCode_Runner.c",
+    "Micro-PubSub_test/third_party/Unity/examples/example_1/test/test_runners/TestProductionCode2_Runner.c",
+    "Micro-PubSub_test/build/CMakeFiles/unity_lib.dir/third_party/Unity/src/unity.c.o.d",
+    "Micro-PubSub_test/third_party/Unity/examples/example_2/test/test_runners/all_tests.c",
+    "Micro-PubSub_test/third_party/Unity/examples/example_2/test/test_runners/TestProductionCode2_Runner.c",
+    "Micro-PubSub_test/third_party/Unity/examples/example_2/test/test_runners/TestProductionCode_Runner.c",
+    "Micro-PubSub_test/third_party/Unity/extras/memory/readme.md",
+    "Micro-PubSub_test/third_party/Unity/extras/fixture/readme.md",
+    "Micro-PubSub_test/third_party/Unity/extras/bdd/readme.md",
+    "Micro-PubSub_test/third_party/Unity/docs/UnityKnownIssues.md",
+    "Micro-PubSub_test/third_party/Unity/docs/UnityHelperScriptsGuide.md",
+    "Micro-PubSub_test/third_party/Unity/docs/UnityGettingStartedGuide.md",
+    "Micro-PubSub_test/third_party/Unity/docs/UnityConfigurationGuide.md",
+    "Micro-PubSub_test/third_party/Unity/docs/UnityChangeLog.md",
+    "Micro-PubSub_test/third_party/Unity/docs/UnityAssertionsReference.md",
+    "Micro-PubSub_test/third_party/Unity/docs/ThrowTheSwitchCodingStandard.md",
+    "Micro-PubSub_test/third_party/Unity/docs/MesonGeneratorRunner.md",
+    "Micro-PubSub_test/third_party/Unity/docs/CONTRIBUTING.md",
+    "Micro-PubSub_test/third_party/Unity/docs/CODE_OF_CONDUCT.md",
+    "Micro-PubSub_test/third_party/Unity/README.md"
+  ]
 }

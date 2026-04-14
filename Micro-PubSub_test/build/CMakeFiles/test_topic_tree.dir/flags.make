@@ -6,5 +6,5 @@ C_DEFINES = -DTEST
 
 C_INCLUDES = -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/include -I/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/third_party/Unity/src
 
-C_FLAGS = -std=gnu11
+C_FLAGS = -g3 -O0 -fno-inline -g -std=gnu11
 

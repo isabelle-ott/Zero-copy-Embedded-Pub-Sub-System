@@ -27,13 +27,6 @@ CMakeFiles/middleware_lib.dir/middleware/src/mem_pool.c.o
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h
  /usr/include/strings.h
- /usr/include/unistd.h
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h
- /usr/include/x86_64-linux-gnu/bits/environments.h
- /usr/include/x86_64-linux-gnu/bits/confname.h
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h
 
 CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o
  /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/src/topic_tree.c
@@ -59,12 +52,11 @@ CMakeFiles/middleware_lib.dir/middleware/src/topic_tree.c.o
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h
- /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/Micro-PubSub_test/middleware/include/mem_pool.h
+ /usr/include/assert.h
  /usr/include/string.h
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h
  /usr/include/strings.h
- /usr/include/assert.h
  /usr/include/unistd.h
  /usr/include/x86_64-linux-gnu/bits/posix_opt.h
  /usr/include/x86_64-linux-gnu/bits/environments.h

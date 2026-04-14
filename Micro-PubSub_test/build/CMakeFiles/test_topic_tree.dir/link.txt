@@ -1,1 +1,1 @@
-/usr/bin/cc CMakeFiles/test_topic_tree.dir/test/test_topic_tree.c.o -o test_topic_tree  libmiddleware_lib.a libunity_lib.a 
+/usr/bin/cc -g3 -O0 -fno-inline -g CMakeFiles/test_topic_tree.dir/test/test_topic_tree.c.o -o test_topic_tree  libmiddleware_lib.a libunity_lib.a 

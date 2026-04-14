@@ -6,6 +6,7 @@
  *  - 最多 32 个块 (单个 uint32_t 位图)
  *  - 块大小在编译时通过 MPS_BLOCK_SIZE 固定
  *  - 通过 __attribute__((aligned(4))) 强制 4 字节对齐
+ *  - generation 使用 uint16_t，避免 255 以上的回绕过早发生
  *  - 通过显式的池满检查保护 __builtin_clz(0) 的未定义行为
  */
 
@@ -34,7 +35,7 @@
 #endif
 
 #if (MPS_BLOCK_SIZE % 4) != 0
-#error "MPS_BLOCK_SIZE 必须是 4 的倍数（ARM 对齐）"
+#error "MPS_BLOCK_SIZE 必须是 4 的倍数（ARM 对齐）"`
 #endif
 
 /* -----------------------------------------------------------------------
@@ -46,7 +47,7 @@ typedef struct {
     uint8_t  storage[MPS_BLOCK_COUNT][MPS_BLOCK_SIZE]
              __attribute__((aligned(4)));
     uint8_t  ref_count[MPS_BLOCK_COUNT];
-    uint8_t  generation[MPS_BLOCK_COUNT]; /* 新增：每块分配代数 */
+    uint16_t  generation[MPS_BLOCK_COUNT]; /* 新增：每块分配代数 */
 } MemPool_t;
 
 /* -----------------------------------------------------------------------
@@ -54,12 +55,12 @@ typedef struct {
  * --------------------------------------------------------------------- */
 
 typedef enum {
-    MPS_OK          =  0,
-    MPS_ERR_FULL    = -1,
-    MPS_ERR_INVALID = -2,
-    MPS_ERR_STALE   = -3,   /* 新增：代数不匹配，ABA 拦截 */
-    MPS_ERR_REF_OVERFLOW = -4, /* 新增：引用计数溢出 */
-    MPS_ERR_NOT_FOUND = -5  /* 新增：未找到 Topic */
+    MPS_OK          =  0,         /* 成功 */
+    MPS_ERR_FULL    = -1,       /* 内存池满 */
+    MPS_ERR_INVALID = -2,  /* 参数非法，对象无效，状态不正确 */
+    MPS_ERR_STALE   = -3,   /* 代数不匹配，ABA 拦截 */
+    MPS_ERR_REF_OVERFLOW = -4, /* 引用计数溢出 */
+    MPS_ERR_NOT_FOUND = -5  /* 未找到 Topic */
 } MpsStatus_t;
 
 typedef struct {
@@ -112,6 +113,16 @@ uint32_t mps_free_count(const MemPool_t *pool);
  * @param ptr   由 mps_alloc() 返回的有效指针。
  */
 MpsStatus_t mps_add_ref(MemPool_t *pool, MpsHandle_t *handle);
+
+/**
+ * @brief 增加指定内存块的引用计数（中断安全版）。
+ */
+MpsStatus_t mps_add_ref_isr(MemPool_t *pool, MpsHandle_t *handle);
+
+/**
+ * @brief 在 O(1) 时间内释放先前分配的块（中断安全版）。
+ */
+MpsStatus_t mps_free_isr(MemPool_t *pool, MpsHandle_t *handle);
 
 
 #endif /* MEM_POOL_H */

@@ -1,98 +1,224 @@
 #include "unity.h"
 #include "topic_tree.h"
 #include "mem_pool.h"
-#include <string.h>
 
-/* 模拟接收数据的全局变量，用于验证回调是否被触发 */
-static int g_mock_received_value = 0;
-static int g_callback_call_count = 0;
+#include <string.h>
 
 static MemPool_t test_pool;
 
-/* 测试用的回调函数 */
-void DummyCallback1(MpsHandle_t *payload) {
-    if (payload != NULL) {
-        g_mock_received_value = *(const int*)(payload->ptr);
+#define MOCK_QUEUE_SIZE 8
+
+typedef struct {
+    MpsHandle_t buffer[MOCK_QUEUE_SIZE];
+    int head;
+    int tail;
+    int count;
+    int fail_after; /* <0: never fail; >=0: 在第 fail_after 次发送后开始失败 */
+    int send_count;
+} MockQueueObj_t;
+
+static MockQueueObj_t q1;
+static MockQueueObj_t q2;
+
+int mps_os_queue_send(MpsQueue_t q, void *item, uint32_t timeout)
+{
+    (void)timeout;
+    MockQueueObj_t *mq = (MockQueueObj_t *)q;
+
+    if (mq == NULL) {
+        return 0;
     }
-    g_callback_call_count++;
-    mps_free(&test_pool, payload); // 模拟订阅者消费完 payload 后调用 free
+
+    if (mq->fail_after >= 0 && mq->send_count >= mq->fail_after) {
+        mq->send_count++;
+        return 0;
+    }
+
+    if (mq->count >= MOCK_QUEUE_SIZE) {
+        mq->send_count++;
+        return 0;
+    }
+
+    mq->buffer[mq->tail] = *(MpsHandle_t *)item;
+    mq->tail = (mq->tail + 1) % MOCK_QUEUE_SIZE;
+    mq->count++;
+    mq->send_count++;
+    return MPS_PASS;
 }
 
-void DummyCallback2(MpsHandle_t *payload) {
-    g_callback_call_count++; // 用于测试多订阅者分发
-    mps_free(&test_pool, payload);
+int mps_os_queue_send_isr(MpsQueue_t q, void *item, BaseType_t *woken)
+{
+    (void)woken;
+    return mps_os_queue_send(q, item, 0u);
 }
 
-
-void setUp(void) {
-    g_mock_received_value = 0;
-    g_callback_call_count = 0;
+void setUp(void)
+{
     mps_init(&test_pool);
     TopicTree_Init(&test_pool);
+
+    memset(&q1, 0, sizeof(q1));
+    memset(&q2, 0, sizeof(q2));
+    q1.fail_after = -1;
+    q2.fail_after = -1;
 }
 
-void tearDown(void) {
-    // 测试结束后的清理工作（如果有）
+void tearDown(void)
+{
 }
 
-/* 重点测试 1：Topic 的成功注册与重复注册处理 */
-void test_TopicRegistration(void) {
-    // 成功注册
-    TEST_ASSERT_TRUE(Topic_Register("/sys/ota/ctrl", QOS_CTRL));
-    TEST_ASSERT_TRUE(Topic_Register("/sensor/imu", QOS_SENSOR));
-    
-    // TODO: 编写断言测试超出 MAX_TOPICS 容量时的拒绝行为
-    
-    // TODO: 编写断言测试相同 Topic 重复注册时的行为期望
+void test_register_idempotent_and_invalid_name(void)
+{
+    TEST_ASSERT_TRUE(Topic_Register("/sensor/temp", QOS_LOG));
+    TEST_ASSERT_TRUE(Topic_Register("/sensor/temp", QOS_SENSOR));
+
+    TEST_ASSERT_FALSE(Topic_Register(NULL, QOS_LOG));
+    TEST_ASSERT_FALSE(Topic_Register("", QOS_LOG));
+
+    char long_name[TOPIC_NAME_MAX_LEN + 8];
+    memset(long_name, 'a', sizeof(long_name));
+    long_name[sizeof(long_name) - 1] = '\0';
+    TEST_ASSERT_FALSE(Topic_Register(long_name, QOS_LOG));
 }
 
-/* 重点测试 2：精准遍历与分发（回调函数触发验证） */
-void test_PublishDispatch(void) {
+void test_subscribe_requires_registered_topic_and_is_idempotent(void)
+{
+    TEST_ASSERT_FALSE(Topic_Subscribe("/missing", (MpsQueue_t)&q1));
 
-    g_callback_call_count = 0;
-    g_mock_received_value = 0;
+    TEST_ASSERT_TRUE(Topic_Register("/t", QOS_LOG));
+    TEST_ASSERT_TRUE(Topic_Subscribe("/t", (MpsQueue_t)&q1));
+    TEST_ASSERT_TRUE(Topic_Subscribe("/t", (MpsQueue_t)&q1));
 
-    Topic_Register("/test/data", QOS_LOG);
-    Topic_Subscribe("/test/data", DummyCallback1);
-    Topic_Subscribe("/test/data", DummyCallback2);
-
-    uint32_t free_blocks_before = mps_free_count(&test_pool);
-
-    MpsHandle_t h;
-    TEST_ASSERT_EQUAL(MPS_OK, Topic_AllocPayload("/test/data", &h));
-    TEST_ASSERT_NOT_NULL(h.ptr);
-
-    int *payload = (int*)h.ptr;
-
-    *payload = 1024;
-
-    bool pub_result = Topic_Publish("/test/data", &h);
-
-    TEST_ASSERT_TRUE(pub_result);
-    TEST_ASSERT_EQUAL(2, g_callback_call_count);
-    TEST_ASSERT_EQUAL(1024, g_mock_received_value);
-
-    uint32_t free_blocks_after = mps_free_count(&test_pool);
-
-    TEST_ASSERT_EQUAL_UINT32_MESSAGE(
-        free_blocks_before,
-        free_blocks_after,
-        "内存泄漏！发布完成后内存块没有被正确回收"
-    );
+    TEST_ASSERT_FALSE(Topic_Subscribe("/t", NULL));
 }
 
-/* 重点测试 3：QoS 行为预演验证 */
-void test_QosBehaviorMock(void) {
-    // TODO: 编写测试来模拟内存池满的情况。
-    // 例如：设计一个内部标志位强制开启“内存满”状态，
-    // 然后分别对 QOS_LOG 发布数据，断言返回 false（丢弃）；
-    // 对 QOS_CTRL 发布数据，断言返回某种阻塞状态或特定标志。
+void test_subscribe_fails_when_subscribers_full(void)
+{
+    TEST_ASSERT_TRUE(Topic_Register("/full", QOS_LOG));
+
+    MockQueueObj_t queues[MAX_SUBSCRIBERS_PER_TOPIC + 1];
+    memset(queues, 0, sizeof(queues));
+    for (int i = 0; i < MAX_SUBSCRIBERS_PER_TOPIC; i++) {
+        TEST_ASSERT_TRUE(Topic_Subscribe("/full", (MpsQueue_t)&queues[i]));
+    }
+
+    TEST_ASSERT_FALSE(Topic_Subscribe("/full", (MpsQueue_t)&queues[MAX_SUBSCRIBERS_PER_TOPIC]));
 }
 
-int main(void) {
+void test_alloc_payload_not_found_and_qos_log_full(void)
+{
+    MpsHandle_t h = {0};
+    TEST_ASSERT_EQUAL(MPS_ERR_NOT_FOUND, Topic_AllocPayload("/not_exist", &h));
+
+    TEST_ASSERT_TRUE(Topic_Register("/log", QOS_LOG));
+    for (uint32_t i = 0; i < MPS_BLOCK_COUNT; i++) {
+        TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&test_pool, &h));
+    }
+
+    TEST_ASSERT_EQUAL(MPS_ERR_FULL, Topic_AllocPayload("/log", &h));
+}
+
+void test_alloc_payload_qos_ctrl_returns_full_after_retry(void)
+{
+    TEST_ASSERT_TRUE(Topic_Register("/ctrl", QOS_CTRL));
+
+    MpsHandle_t hs[MPS_BLOCK_COUNT];
+    for (uint32_t i = 0; i < MPS_BLOCK_COUNT; i++) {
+        TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&test_pool, &hs[i]));
+    }
+
+    MpsHandle_t out = {0};
+    TEST_ASSERT_EQUAL(MPS_ERR_FULL, Topic_AllocPayload("/ctrl", &out));
+}
+
+void test_publish_dispatch_and_reference_reclaim(void)
+{
+    TEST_ASSERT_TRUE(Topic_Register("/pub", QOS_LOG));
+    TEST_ASSERT_TRUE(Topic_Subscribe("/pub", (MpsQueue_t)&q1));
+    TEST_ASSERT_TRUE(Topic_Subscribe("/pub", (MpsQueue_t)&q2));
+
+    uint32_t free_before = mps_free_count(&test_pool);
+
+    MpsHandle_t h = {0};
+    TEST_ASSERT_EQUAL(MPS_OK, Topic_AllocPayload("/pub", &h));
+    *(int *)h.ptr = 1234;
+
+    TEST_ASSERT_TRUE(Topic_Publish("/pub", &h));
+
+    TEST_ASSERT_EQUAL(1, q1.count);
+    TEST_ASSERT_EQUAL(1, q2.count);
+    TEST_ASSERT_EQUAL(1234, *(int *)q1.buffer[q1.head].ptr);
+    TEST_ASSERT_EQUAL(1234, *(int *)q2.buffer[q2.head].ptr);
+
+    /* Publish 内部会释放发布者初始引用 */
+    TEST_ASSERT_NULL(h.ptr);
+
+    MpsHandle_t c1 = q1.buffer[q1.head];
+    MpsHandle_t c2 = q2.buffer[q2.head];
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&test_pool, &c1));
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&test_pool, &c2));
+
+    TEST_ASSERT_EQUAL_UINT32(free_before, mps_free_count(&test_pool));
+}
+
+void test_publish_send_fail_rolls_back_ref(void)
+{
+    TEST_ASSERT_TRUE(Topic_Register("/rollback", QOS_LOG));
+    TEST_ASSERT_TRUE(Topic_Subscribe("/rollback", (MpsQueue_t)&q1));
+    TEST_ASSERT_TRUE(Topic_Subscribe("/rollback", (MpsQueue_t)&q2));
+
+    q2.fail_after = 0; /* q2 首次发送即失败 */
+
+    uint32_t free_before = mps_free_count(&test_pool);
+
+    MpsHandle_t h = {0};
+    TEST_ASSERT_EQUAL(MPS_OK, Topic_AllocPayload("/rollback", &h));
+
+    TEST_ASSERT_TRUE(Topic_Publish("/rollback", &h));
+
+    TEST_ASSERT_EQUAL(1, q1.count);
+    TEST_ASSERT_EQUAL(0, q2.count);
+
+    /* Publish 内部会释放发布者初始引用 */
+    TEST_ASSERT_NULL(h.ptr);
+
+    MpsHandle_t c1 = q1.buffer[q1.head];
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&test_pool, &c1));
+
+    TEST_ASSERT_EQUAL_UINT32(free_before, mps_free_count(&test_pool));
+}
+
+void test_publish_from_isr_dispatch(void)
+{
+    TEST_ASSERT_TRUE(Topic_Register("/isr", QOS_LOG));
+    TEST_ASSERT_TRUE(Topic_Subscribe("/isr", (MpsQueue_t)&q1));
+
+    MpsHandle_t h = {0};
+    TEST_ASSERT_EQUAL(MPS_OK, Topic_AllocPayload("/isr", &h));
+
+    BaseType_t woken = 0;
+    TEST_ASSERT_TRUE(Topic_PublishFromISR("/isr", &h, &woken));
+
+    TEST_ASSERT_EQUAL(1, q1.count);
+
+    /* PublishFromISR 内部会释放发布者初始引用 */
+    TEST_ASSERT_NULL(h.ptr);
+    MpsHandle_t c1 = q1.buffer[q1.head];
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&test_pool, &c1));
+}
+
+int main(void)
+{
     UNITY_BEGIN();
-    RUN_TEST(test_TopicRegistration);
-    RUN_TEST(test_PublishDispatch);
-    RUN_TEST(test_QosBehaviorMock);
+
+    RUN_TEST(test_register_idempotent_and_invalid_name);
+    RUN_TEST(test_subscribe_requires_registered_topic_and_is_idempotent);
+    RUN_TEST(test_subscribe_fails_when_subscribers_full);
+    RUN_TEST(test_alloc_payload_not_found_and_qos_log_full);
+    RUN_TEST(test_alloc_payload_qos_ctrl_returns_full_after_retry);
+    RUN_TEST(test_publish_dispatch_and_reference_reclaim);
+    RUN_TEST(test_publish_send_fail_rolls_back_ref);
+    RUN_TEST(test_publish_from_isr_dispatch);
+
     return UNITY_END();
 }

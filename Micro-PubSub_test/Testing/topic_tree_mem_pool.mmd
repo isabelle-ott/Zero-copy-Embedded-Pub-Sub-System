@@ -1,0 +1,63 @@
+flowchart TD
+    subgraph MP[MemPool 层]
+        mps_init[mps_init]
+        mps_alloc[mps_alloc]
+        mps_free[mps_free]
+        mps_free_isr[mps_free_isr]
+        mps_add_ref[mps_add_ref]
+        mps_add_ref_isr[mps_add_ref_isr]
+        mps_free_count[mps_free_count]
+
+        ptr2idx[_ptr_to_idx]
+        blockptr[_block_ptr]
+        freecore[_mps_free_core]
+        addcore[_mps_add_ref_core]
+
+        mps_alloc --> blockptr
+        mps_free --> ptr2idx
+        mps_free --> freecore
+        mps_free_isr --> ptr2idx
+        mps_free_isr --> freecore
+        mps_add_ref --> ptr2idx
+        mps_add_ref --> addcore
+        mps_add_ref_isr --> ptr2idx
+        mps_add_ref_isr --> addcore
+    end
+
+    subgraph TT[TopicTree 层]
+        tt_init[TopicTree_Init]
+        topic_register[Topic_Register]
+        topic_subscribe[Topic_Subscribe]
+        topic_publish[Topic_Publish]
+        topic_publish_isr[Topic_PublishFromISR]
+        topic_alloc[Topic_AllocPayload]
+        find_topic[_find_topic_index]
+    end
+
+    tt_init --> mp_init_ref[memory pool pointer saved]
+
+    topic_register --> find_topic
+    topic_subscribe --> find_topic
+    topic_publish --> find_topic
+    topic_publish_isr --> find_topic
+    topic_alloc --> find_topic
+
+    topic_alloc --> mps_alloc
+    topic_alloc --> qos_check{QoS 判断}
+
+    qos_check -->|QOS_LOG / QOS_SENSOR| alloc_fail[直接返回 MPS_ERR_FULL]
+    qos_check -->|QOS_CTRL| retry_loop[重试等待]
+    retry_loop --> mps_alloc
+
+    topic_publish --> add_ref_1[mps_add_ref]
+    topic_publish --> queue_send[mps_os_queue_send]
+    topic_publish --> free_pub[mps_free]
+
+    topic_publish_isr --> add_ref_isr[mps_add_ref_isr]
+    topic_publish_isr --> queue_send_isr[mps_os_queue_send_isr]
+    topic_publish_isr --> free_pub_isr[mps_free_isr]
+
+    queue_send --> on_fail1[发送失败则回收该订阅者引用]
+    queue_send_isr --> on_fail2[发送失败则回收该订阅者引用]
+    on_fail1 --> mps_free
+    on_fail2 --> mps_free_isr

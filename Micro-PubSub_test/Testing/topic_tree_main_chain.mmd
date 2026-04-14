@@ -1,0 +1,8 @@
+flowchart LR
+    A[Topic_AllocPayload] --> B[mps_alloc]
+    C[Topic_Publish] --> D[mps_add_ref]
+    C --> E[mps_os_queue_send]
+    C --> F[mps_free]
+    G[Topic_PublishFromISR] --> H[mps_add_ref_isr]
+    G --> I[mps_os_queue_send_isr]
+    G --> J[mps_free_isr]

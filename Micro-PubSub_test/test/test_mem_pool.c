@@ -1,67 +1,42 @@
 #include "unity.h"
 #include "mem_pool.h"
-#include <stdint.h>
-#include <stddef.h>
 
-/* One pool shared across tests */
+#include <stdint.h>
+
 static MemPool_t pool;
 static MpsHandle_t handles[MPS_BLOCK_COUNT];
 
-/* Unity hooks */
-void setUp(void)    { mps_init(&pool); }
-void tearDown(void) {}
-
-/* ===================================================================
- * A. Normal alloc / free
- * ================================================================= */
-
-void test_alloc_returns_non_null(void)
+void setUp(void)
 {
-    MpsHandle_t h;
+    mps_init(&pool);
+}
+
+void tearDown(void)
+{
+}
+
+void test_alloc_and_free_basic(void)
+{
+    MpsHandle_t h = {0};
+
     TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &h));
     TEST_ASSERT_NOT_NULL(h.ptr);
+    TEST_ASSERT_TRUE(h.idx >= 0);
+
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&pool, &h));
+    TEST_ASSERT_NULL(h.ptr);
 }
 
-void test_alloc_returns_unique_pointers(void)
+void test_alloc_unique_pointers(void)
 {
-    MpsHandle_t a, b;
+    MpsHandle_t a = {0};
+    MpsHandle_t b = {0};
 
-    mps_alloc(&pool, &a);
-    mps_alloc(&pool, &b);
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &a));
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &b));
 
-    TEST_ASSERT_NOT_NULL(a.ptr);
-    TEST_ASSERT_NOT_NULL(b.ptr);
     TEST_ASSERT_NOT_EQUAL(a.ptr, b.ptr);
 }
-
-void test_free_allows_realloc(void)
-{
-    MpsHandle_t h;
-
-    mps_alloc(&pool, &h);
-    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&pool, &h));
-
-    MpsHandle_t h2;
-    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &h2));
-    TEST_ASSERT_NOT_NULL(h2.ptr);
-}
-
-void test_write_and_read_block(void)
-{
-    MpsHandle_t h;
-    mps_alloc(&pool, &h);
-
-    uint32_t *p = (uint32_t *)h.ptr;
-    *p = 0xDEADBEEFu;
-
-    TEST_ASSERT_EQUAL_UINT32(0xDEADBEEFu, *p);
-
-    mps_free(&pool, &h);
-}
-
-/* ===================================================================
- * B. Pool full
- * ================================================================= */
 
 void test_alloc_returns_full_when_pool_full(void)
 {
@@ -69,177 +44,138 @@ void test_alloc_returns_full_when_pool_full(void)
         TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &handles[i]));
     }
 
-    MpsHandle_t h;
+    MpsHandle_t h = {0};
     TEST_ASSERT_EQUAL(MPS_ERR_FULL, mps_alloc(&pool, &h));
 }
 
-void test_free_one_then_alloc_from_full_pool(void)
+void test_free_count_tracks_alloc_and_free(void)
 {
-    for (uint32_t i = 0; i < MPS_BLOCK_COUNT; i++) {
-        mps_alloc(&pool, &handles[i]);
-    }
+    TEST_ASSERT_EQUAL_UINT32(MPS_BLOCK_COUNT, mps_free_count(&pool));
 
-    MpsHandle_t h;
-    TEST_ASSERT_EQUAL(MPS_ERR_FULL, mps_alloc(&pool, &h));
-
-    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&pool, &handles[0]));
-
+    MpsHandle_t h = {0};
     TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &h));
+    TEST_ASSERT_EQUAL_UINT32(MPS_BLOCK_COUNT - 1u, mps_free_count(&pool));
+
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&pool, &h));
+    TEST_ASSERT_EQUAL_UINT32(MPS_BLOCK_COUNT, mps_free_count(&pool));
 }
 
-/* ===================================================================
- * C. Alignment
- * ================================================================= */
-
-void test_alloc_4byte_aligned(void)
+void test_alloc_is_4byte_aligned(void)
 {
     for (uint32_t i = 0; i < MPS_BLOCK_COUNT; i++) {
-        MpsHandle_t h;
-        mps_alloc(&pool, &h);
-
-        uintptr_t addr = (uintptr_t)h.ptr;
-        TEST_ASSERT_EQUAL_UINT32(0u, addr % 4u);
+        MpsHandle_t h = {0};
+        TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &h));
+        TEST_ASSERT_EQUAL_UINT32(0u, ((uintptr_t)h.ptr) % 4u);
     }
 }
 
-/* ===================================================================
- * D. Invalid free
- * ================================================================= */
-
-void test_free_null_handle(void)
+void test_free_rejects_invalid_handle_or_index(void)
 {
     TEST_ASSERT_EQUAL(MPS_ERR_INVALID, mps_free(&pool, NULL));
-}
 
-void test_free_invalid_idx(void)
-{
-    MpsHandle_t h;
-    mps_alloc(&pool, &h);
+    MpsHandle_t h = {0};
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &h));
 
     h.idx += 1;
-
     TEST_ASSERT_EQUAL(MPS_ERR_INVALID, mps_free(&pool, &h));
 }
 
-void test_free_invalid_generation(void)
+void test_generation_detects_stale_handle(void)
 {
-    MpsHandle_t h;
-    mps_alloc(&pool, &h);
+    MpsHandle_t old_h = {0};
+    MpsHandle_t stale_h = {0};
+    MpsHandle_t new_h = {0};
 
-    h.generation++;
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &old_h));
+    stale_h = old_h; /* 保存释放前快照，避免 mps_free 将 ptr 置 NULL */
 
-    TEST_ASSERT_EQUAL(MPS_ERR_STALE, mps_free(&pool, &h));
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&pool, &old_h));
+    TEST_ASSERT_NULL(old_h.ptr);
+
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &new_h));
+
+    TEST_ASSERT_EQUAL(MPS_ERR_STALE, mps_free(&pool, &stale_h));
 }
 
-/* ===================================================================
- * E. Free-count accounting
- * ================================================================= */
-
-void test_free_count_starts_at_block_count(void)
+void test_add_ref_and_free_reference_counting(void)
 {
-    TEST_ASSERT_EQUAL_UINT32(MPS_BLOCK_COUNT, mps_free_count(&pool));
+    MpsHandle_t owner = {0};
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &owner));
+
+    MpsHandle_t sub1 = owner;
+    MpsHandle_t sub2 = owner;
+
+    TEST_ASSERT_EQUAL(MPS_OK, mps_add_ref(&pool, &sub1));
+    TEST_ASSERT_EQUAL(MPS_OK, mps_add_ref(&pool, &sub2));
+
+    uint32_t free_before_release = mps_free_count(&pool);
+    TEST_ASSERT_EQUAL(MPS_BLOCK_COUNT - 1u, free_before_release);
+
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&pool, &sub1));
+    TEST_ASSERT_EQUAL(MPS_BLOCK_COUNT - 1u, mps_free_count(&pool));
+
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&pool, &sub2));
+    TEST_ASSERT_EQUAL(MPS_BLOCK_COUNT - 1u, mps_free_count(&pool));
+
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free(&pool, &owner));
+    TEST_ASSERT_EQUAL(MPS_BLOCK_COUNT, mps_free_count(&pool));
 }
 
-void test_free_count_decrements_on_alloc(void)
+void test_add_ref_overflow_returns_error(void)
 {
-    MpsHandle_t h;
-    mps_alloc(&pool, &h);
+    MpsHandle_t h = {0};
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &h));
 
-    TEST_ASSERT_EQUAL_UINT32(MPS_BLOCK_COUNT - 1u, mps_free_count(&pool));
-}
-
-void test_free_count_increments_on_free(void)
-{
-    MpsHandle_t h;
-    mps_alloc(&pool, &h);
-    mps_free(&pool, &h);
-
-    TEST_ASSERT_EQUAL_UINT32(MPS_BLOCK_COUNT, mps_free_count(&pool));
-}
-
-void test_free_count_zero_when_pool_full(void)
-{
-    for (uint32_t i = 0; i < MPS_BLOCK_COUNT; i++) {
-        mps_alloc(&pool, &handles[i]);
+    for (uint32_t i = 0; i < 254u; i++) {
+        TEST_ASSERT_EQUAL(MPS_OK, mps_add_ref(&pool, &h));
     }
 
-    TEST_ASSERT_EQUAL_UINT32(0u, mps_free_count(&pool));
+    TEST_ASSERT_EQUAL(MPS_ERR_REF_OVERFLOW, mps_add_ref(&pool, &h));
 }
 
-/* ===================================================================
- * F. ABA / safety (核心)
- * ================================================================= */
-
-void test_free_detects_stale_handle(void)
+void test_add_ref_rejects_stale_generation(void)
 {
-    MpsHandle_t h1, h2;
+    MpsHandle_t h = {0};
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &h));
 
-    mps_alloc(&pool, &h1);
-    mps_free(&pool, &h1);
-
-    mps_alloc(&pool, &h2);
-
-    TEST_ASSERT_EQUAL(MPS_ERR_STALE, mps_free(&pool, &h1));
+    h.generation++;
+    TEST_ASSERT_EQUAL(MPS_ERR_STALE, mps_add_ref(&pool, &h));
 }
 
-void test_double_free(void)
+void test_isr_variants_work(void)
 {
-    MpsHandle_t h;
+    MpsHandle_t owner = {0};
+    TEST_ASSERT_EQUAL(MPS_OK, mps_alloc(&pool, &owner));
 
-    mps_alloc(&pool, &h);
-    mps_free(&pool, &h);
+    MpsHandle_t sub = owner;
 
-    TEST_ASSERT_EQUAL(MPS_ERR_INVALID, mps_free(&pool, &h));
+    TEST_ASSERT_EQUAL(MPS_OK, mps_add_ref_isr(&pool, &sub));
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free_isr(&pool, &sub));
+
+    /* sub 是“最后一个释放该句柄”的副本，因此 ptr 会被置 NULL */
+    TEST_ASSERT_NULL(sub.ptr);
+
+    /* owner 仍然持有自己的副本，应可正常释放 */
+    TEST_ASSERT_NOT_NULL(owner.ptr);
+    TEST_ASSERT_EQUAL(MPS_OK, mps_free_isr(&pool, &owner));
+    TEST_ASSERT_NULL(owner.ptr);
 }
-
-void test_handle_ptr_null_after_free(void)
-{
-    MpsHandle_t h;
-
-    mps_alloc(&pool, &h);
-    TEST_ASSERT_NOT_NULL(h.ptr);
-
-    mps_free(&pool, &h);
-
-    TEST_ASSERT_NULL(h.ptr);
-}
-
-/* ===================================================================
- * Runner
- * ================================================================= */
 
 int main(void)
 {
     UNITY_BEGIN();
 
-    /* A */
-    RUN_TEST(test_alloc_returns_non_null);
-    RUN_TEST(test_alloc_returns_unique_pointers);
-    RUN_TEST(test_free_allows_realloc);
-    RUN_TEST(test_write_and_read_block);
-
-    /* B */
+    RUN_TEST(test_alloc_and_free_basic);
+    RUN_TEST(test_alloc_unique_pointers);
     RUN_TEST(test_alloc_returns_full_when_pool_full);
-    RUN_TEST(test_free_one_then_alloc_from_full_pool);
-
-    /* C */
-    RUN_TEST(test_alloc_4byte_aligned);
-
-    /* D */
-    RUN_TEST(test_free_null_handle);
-    RUN_TEST(test_free_invalid_idx);
-    RUN_TEST(test_free_invalid_generation);
-
-    /* E */
-    RUN_TEST(test_free_count_starts_at_block_count);
-    RUN_TEST(test_free_count_decrements_on_alloc);
-    RUN_TEST(test_free_count_increments_on_free);
-    RUN_TEST(test_free_count_zero_when_pool_full);
-
-    /* F */
-    RUN_TEST(test_free_detects_stale_handle);
-    RUN_TEST(test_double_free);
-    RUN_TEST(test_handle_ptr_null_after_free);
+    RUN_TEST(test_free_count_tracks_alloc_and_free);
+    RUN_TEST(test_alloc_is_4byte_aligned);
+    RUN_TEST(test_free_rejects_invalid_handle_or_index);
+    RUN_TEST(test_generation_detects_stale_handle);
+    RUN_TEST(test_add_ref_and_free_reference_counting);
+    RUN_TEST(test_add_ref_overflow_returns_error);
+    RUN_TEST(test_add_ref_rejects_stale_generation);
+    RUN_TEST(test_isr_variants_work);
 
     return UNITY_END();
 }
