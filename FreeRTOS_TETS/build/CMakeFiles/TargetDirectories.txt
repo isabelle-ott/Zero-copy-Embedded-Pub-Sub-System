@@ -1,0 +1,7 @@
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles/FreeRTOS_TETS.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles/edit_cache.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles/rebuild_cache.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir

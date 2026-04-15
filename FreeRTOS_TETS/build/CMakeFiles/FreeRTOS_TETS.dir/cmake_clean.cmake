@@ -1,0 +1,27 @@
+file(REMOVE_RECURSE
+  "FreeRTOS_TETS.map"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.obj"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.obj.d"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/gpio.c.obj"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/gpio.c.obj.d"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/main.c.obj"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/main.c.obj.d"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj.d"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj.d"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj.d"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj.d"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj"
+  "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj.d"
+  "CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj"
+  "FreeRTOS_TETS.elf"
+  "FreeRTOS_TETS.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang ASM C)
+  include(CMakeFiles/FreeRTOS_TETS.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
