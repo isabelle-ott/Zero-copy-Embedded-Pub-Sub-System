@@ -13,21 +13,6 @@
 
 static char TX_buff[300];
 
-#define UART_READY_TIMEOUT_MS   (1000U)
-
-static inline void wait_uart_ready(void)
-{
-    uint32_t t = HAL_GetTick();
-    while(huart1.gState != HAL_UART_STATE_READY)
-    {
-        if(HAL_GetTick() - t > UART_READY_TIMEOUT_MS)
-        {
-            D1_LED_set(0);
-            return;
-        }
-    }
-}
-
 HAL_StatusTypeDef status_test;
 static inline HAL_StatusTypeDef uart_send(uint8_t *data, uint16_t size)
 {
