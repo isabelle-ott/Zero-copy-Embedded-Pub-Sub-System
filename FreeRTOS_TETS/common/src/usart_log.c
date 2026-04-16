@@ -3,6 +3,7 @@
 #include "FreeRTOS.h"
 #include "led.h"
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_def.h"
 #include "stm32f4xx_hal_uart.h"
 #include "usart.h"
 #include "semphr.h"
@@ -13,6 +14,7 @@
 static char TX_buff[300];
 
 #define UART_READY_TIMEOUT_MS   (1000U)
+
 static inline void wait_uart_ready(void)
 {
     uint32_t t = HAL_GetTick();
@@ -26,9 +28,11 @@ static inline void wait_uart_ready(void)
     }
 }
 
-static inline void uart_send(uint8_t *data, uint16_t size)
+HAL_StatusTypeDef status_test;
+static inline HAL_StatusTypeDef uart_send(uint8_t *data, uint16_t size)
 {
-    HAL_UART_Transmit_DMA(&huart1, data, size);
+    status_test = HAL_UART_Transmit_DMA(&huart1, data, size);
+    return status_test;
 }
 
 static StaticSemaphore_t TXmutex_buffer;
@@ -39,7 +43,7 @@ void __logger_print_init(void)
     TXmutex = xSemaphoreCreateMutexStatic(&TXmutex_buffer);
 }
 
-void xxx__logger_print_f(const char *format, ...)
+void xxx_print_log_f(const char *format, ...)
 {
     va_list args;
     va_start(args, format);
@@ -49,6 +53,7 @@ void xxx__logger_print_f(const char *format, ...)
         uart_send((uint8_t*)TX_buff, len);
         xSemaphoreGive(TXmutex);
     }else{
-        D1_LED_set(0);
+        D1_LED_set(1);
     }
 }
+

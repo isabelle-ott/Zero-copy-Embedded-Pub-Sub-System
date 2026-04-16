@@ -14,10 +14,10 @@ void led_toggle(void)
 void D1_LED_set(int8_t status)
 {
     switch (status) {
-        case 0:
+        case 1:
             HAL_GPIO_WritePin(BUG_LED_GPIO_Port, BUG_LED_Pin, GPIO_PIN_RESET);
             break;
-        case 1:
+        case 0:
             HAL_GPIO_WritePin(BUG_LED_GPIO_Port, BUG_LED_Pin, GPIO_PIN_SET);
             break;
         case -1:

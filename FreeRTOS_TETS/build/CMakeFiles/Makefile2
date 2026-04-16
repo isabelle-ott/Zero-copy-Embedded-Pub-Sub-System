@@ -97,8 +97,8 @@ cmake/stm32cubemx/clean: cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/clean
 # Target rules for target CMakeFiles/FreeRTOS_TETS.dir
 
 # All Build rule for target.
-CMakeFiles/FreeRTOS_TETS.dir/all: cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/all
 CMakeFiles/FreeRTOS_TETS.dir/all: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/all
+CMakeFiles/FreeRTOS_TETS.dir/all: cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28 "Built target FreeRTOS_TETS"

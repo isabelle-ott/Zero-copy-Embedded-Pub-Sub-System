@@ -1,5 +1,6 @@
 #include "systemTask.h"
 #include "sysLED_Task.h"
+#include "usart_log.h"
 
 #define SYSTEM_TASK_LED_STACK_WORDS   (128U)
 #define SYSTEM_TASK_LED_PRIORITY      (1U)
@@ -76,4 +77,5 @@ static void SystemTask_CreateLedTask(void)
 static void SystemTask_Init(void)
 {
   /* 预留给后续硬件初始化、外设初始化或资源初始化 */
+  __logger_print_init();
 }
