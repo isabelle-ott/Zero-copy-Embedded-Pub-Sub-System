@@ -155,6 +155,30 @@ FreeRTOS/fast:
 	$(MAKE) $(MAKESILENT) -f cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/build.make cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/build
 .PHONY : FreeRTOS/fast
 
+Core/Src/dma.obj: Core/Src/dma.c.obj
+.PHONY : Core/Src/dma.obj
+
+# target to build an object file
+Core/Src/dma.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj
+.PHONY : Core/Src/dma.c.obj
+
+Core/Src/dma.i: Core/Src/dma.c.i
+.PHONY : Core/Src/dma.i
+
+# target to preprocess a source file
+Core/Src/dma.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.i
+.PHONY : Core/Src/dma.c.i
+
+Core/Src/dma.s: Core/Src/dma.c.s
+.PHONY : Core/Src/dma.s
+
+# target to generate assembly for a file
+Core/Src/dma.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.s
+.PHONY : Core/Src/dma.c.s
+
 Core/Src/freertos.obj: Core/Src/freertos.c.obj
 .PHONY : Core/Src/freertos.obj
 
@@ -347,6 +371,174 @@ Core/Src/sysmem.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.s
 .PHONY : Core/Src/sysmem.c.s
 
+Core/Src/usart.obj: Core/Src/usart.c.obj
+.PHONY : Core/Src/usart.obj
+
+# target to build an object file
+Core/Src/usart.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj
+.PHONY : Core/Src/usart.c.obj
+
+Core/Src/usart.i: Core/Src/usart.c.i
+.PHONY : Core/Src/usart.i
+
+# target to preprocess a source file
+Core/Src/usart.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.i
+.PHONY : Core/Src/usart.c.i
+
+Core/Src/usart.s: Core/Src/usart.c.s
+.PHONY : Core/Src/usart.s
+
+# target to generate assembly for a file
+Core/Src/usart.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.s
+.PHONY : Core/Src/usart.c.s
+
+app/src/sysLED_Task.obj: app/src/sysLED_Task.c.obj
+.PHONY : app/src/sysLED_Task.obj
+
+# target to build an object file
+app/src/sysLED_Task.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj
+.PHONY : app/src/sysLED_Task.c.obj
+
+app/src/sysLED_Task.i: app/src/sysLED_Task.c.i
+.PHONY : app/src/sysLED_Task.i
+
+# target to preprocess a source file
+app/src/sysLED_Task.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.i
+.PHONY : app/src/sysLED_Task.c.i
+
+app/src/sysLED_Task.s: app/src/sysLED_Task.c.s
+.PHONY : app/src/sysLED_Task.s
+
+# target to generate assembly for a file
+app/src/sysLED_Task.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.s
+.PHONY : app/src/sysLED_Task.c.s
+
+app/src/systemTask.obj: app/src/systemTask.c.obj
+.PHONY : app/src/systemTask.obj
+
+# target to build an object file
+app/src/systemTask.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj
+.PHONY : app/src/systemTask.c.obj
+
+app/src/systemTask.i: app/src/systemTask.c.i
+.PHONY : app/src/systemTask.i
+
+# target to preprocess a source file
+app/src/systemTask.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.i
+.PHONY : app/src/systemTask.c.i
+
+app/src/systemTask.s: app/src/systemTask.c.s
+.PHONY : app/src/systemTask.s
+
+# target to generate assembly for a file
+app/src/systemTask.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.s
+.PHONY : app/src/systemTask.c.s
+
+bsp/src/led.obj: bsp/src/led.c.obj
+.PHONY : bsp/src/led.obj
+
+# target to build an object file
+bsp/src/led.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj
+.PHONY : bsp/src/led.c.obj
+
+bsp/src/led.i: bsp/src/led.c.i
+.PHONY : bsp/src/led.i
+
+# target to preprocess a source file
+bsp/src/led.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.i
+.PHONY : bsp/src/led.c.i
+
+bsp/src/led.s: bsp/src/led.c.s
+.PHONY : bsp/src/led.s
+
+# target to generate assembly for a file
+bsp/src/led.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.s
+.PHONY : bsp/src/led.c.s
+
+common/src/usart_log.obj: common/src/usart_log.c.obj
+.PHONY : common/src/usart_log.obj
+
+# target to build an object file
+common/src/usart_log.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj
+.PHONY : common/src/usart_log.c.obj
+
+common/src/usart_log.i: common/src/usart_log.c.i
+.PHONY : common/src/usart_log.i
+
+# target to preprocess a source file
+common/src/usart_log.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.i
+.PHONY : common/src/usart_log.c.i
+
+common/src/usart_log.s: common/src/usart_log.c.s
+.PHONY : common/src/usart_log.s
+
+# target to generate assembly for a file
+common/src/usart_log.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.s
+.PHONY : common/src/usart_log.c.s
+
+middleware/src/mem_pool.obj: middleware/src/mem_pool.c.obj
+.PHONY : middleware/src/mem_pool.obj
+
+# target to build an object file
+middleware/src/mem_pool.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj
+.PHONY : middleware/src/mem_pool.c.obj
+
+middleware/src/mem_pool.i: middleware/src/mem_pool.c.i
+.PHONY : middleware/src/mem_pool.i
+
+# target to preprocess a source file
+middleware/src/mem_pool.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.i
+.PHONY : middleware/src/mem_pool.c.i
+
+middleware/src/mem_pool.s: middleware/src/mem_pool.c.s
+.PHONY : middleware/src/mem_pool.s
+
+# target to generate assembly for a file
+middleware/src/mem_pool.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.s
+.PHONY : middleware/src/mem_pool.c.s
+
+middleware/src/topic_tree.obj: middleware/src/topic_tree.c.obj
+.PHONY : middleware/src/topic_tree.obj
+
+# target to build an object file
+middleware/src/topic_tree.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj
+.PHONY : middleware/src/topic_tree.c.obj
+
+middleware/src/topic_tree.i: middleware/src/topic_tree.c.i
+.PHONY : middleware/src/topic_tree.i
+
+# target to preprocess a source file
+middleware/src/topic_tree.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.i
+.PHONY : middleware/src/topic_tree.c.i
+
+middleware/src/topic_tree.s: middleware/src/topic_tree.c.s
+.PHONY : middleware/src/topic_tree.s
+
+# target to generate assembly for a file
+middleware/src/topic_tree.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FreeRTOS_TETS.dir/build.make CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.s
+.PHONY : middleware/src/topic_tree.c.s
+
 startup_stm32f407xx.obj: startup_stm32f407xx.s.obj
 .PHONY : startup_stm32f407xx.obj
 
@@ -366,6 +558,9 @@ help:
 	@echo "... FreeRTOS"
 	@echo "... FreeRTOS_TETS"
 	@echo "... STM32_Drivers"
+	@echo "... Core/Src/dma.obj"
+	@echo "... Core/Src/dma.i"
+	@echo "... Core/Src/dma.s"
 	@echo "... Core/Src/freertos.obj"
 	@echo "... Core/Src/freertos.i"
 	@echo "... Core/Src/freertos.s"
@@ -390,6 +585,27 @@ help:
 	@echo "... Core/Src/sysmem.obj"
 	@echo "... Core/Src/sysmem.i"
 	@echo "... Core/Src/sysmem.s"
+	@echo "... Core/Src/usart.obj"
+	@echo "... Core/Src/usart.i"
+	@echo "... Core/Src/usart.s"
+	@echo "... app/src/sysLED_Task.obj"
+	@echo "... app/src/sysLED_Task.i"
+	@echo "... app/src/sysLED_Task.s"
+	@echo "... app/src/systemTask.obj"
+	@echo "... app/src/systemTask.i"
+	@echo "... app/src/systemTask.s"
+	@echo "... bsp/src/led.obj"
+	@echo "... bsp/src/led.i"
+	@echo "... bsp/src/led.s"
+	@echo "... common/src/usart_log.obj"
+	@echo "... common/src/usart_log.i"
+	@echo "... common/src/usart_log.s"
+	@echo "... middleware/src/mem_pool.obj"
+	@echo "... middleware/src/mem_pool.i"
+	@echo "... middleware/src/mem_pool.s"
+	@echo "... middleware/src/topic_tree.obj"
+	@echo "... middleware/src/topic_tree.i"
+	@echo "... middleware/src/topic_tree.s"
 	@echo "... startup_stm32f407xx.obj"
 .PHONY : help
 

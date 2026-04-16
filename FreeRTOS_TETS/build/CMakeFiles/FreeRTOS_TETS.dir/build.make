@@ -111,10 +111,38 @@ CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.s"
 	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/freertos.c -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.s
 
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj: ../Core/Src/dma.c
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/dma.c
+
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/dma.c > CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.i
+
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/dma.c -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.s
+
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj: ../Core/Src/usart.c
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/usart.c
+
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/usart.c > CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.i
+
+CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/usart.c -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.s
+
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj: ../Core/Src/stm32f4xx_it.c
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj"
 	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/stm32f4xx_it.c
 
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.i: cmake_force
@@ -128,7 +156,7 @@ CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.s: cmake_force
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj: ../Core/Src/stm32f4xx_hal_msp.c
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj"
 	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/stm32f4xx_hal_msp.c
 
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.i: cmake_force
@@ -142,7 +170,7 @@ CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.s: cmake_force
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj: ../Core/Src/stm32f4xx_hal_timebase_tim.c
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj"
 	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/stm32f4xx_hal_timebase_tim.c
 
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.i: cmake_force
@@ -156,7 +184,7 @@ CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.s: cmake_forc
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj: ../Core/Src/sysmem.c
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj"
 	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/sysmem.c
 
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.i: cmake_force
@@ -170,7 +198,7 @@ CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.s: cmake_force
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj: ../Core/Src/syscalls.c
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj"
 	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/syscalls.c
 
 CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.i: cmake_force
@@ -183,7 +211,7 @@ CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.s: cmake_force
 
 CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
 CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj: ../startup_stm32f407xx.s
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building ASM object CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building ASM object CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj"
 	/usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/startup_stm32f407xx.s
 
 CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.i: cmake_force
@@ -194,17 +222,109 @@ CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling ASM source to assembly CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.s"
 	/usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/startup_stm32f407xx.s -o CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.s
 
+CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
+CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj: ../app/src/sysLED_Task.c
+CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/app/src/sysLED_Task.c
+
+CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/app/src/sysLED_Task.c > CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.i
+
+CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/app/src/sysLED_Task.c -o CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.s
+
+CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
+CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj: ../app/src/systemTask.c
+CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/app/src/systemTask.c
+
+CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/app/src/systemTask.c > CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.i
+
+CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/app/src/systemTask.c -o CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.s
+
+CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
+CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj: ../bsp/src/led.c
+CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/bsp/src/led.c
+
+CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/bsp/src/led.c > CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.i
+
+CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/bsp/src/led.c -o CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.s
+
+CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
+CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj: ../common/src/usart_log.c
+CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/common/src/usart_log.c
+
+CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/common/src/usart_log.c > CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.i
+
+CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/common/src/usart_log.c -o CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.s
+
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj: ../middleware/src/mem_pool.c
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/middleware/src/mem_pool.c
+
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/middleware/src/mem_pool.c > CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.i
+
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/middleware/src/mem_pool.c -o CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.s
+
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj: CMakeFiles/FreeRTOS_TETS.dir/flags.make
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj: ../middleware/src/topic_tree.c
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj: CMakeFiles/FreeRTOS_TETS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj -MF CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj.d -o CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj -c /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/middleware/src/topic_tree.c
+
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.i"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/middleware/src/topic_tree.c > CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.i
+
+CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.s"
+	/usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/middleware/src/topic_tree.c -o CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.s
+
 # Object files for target FreeRTOS_TETS
 FreeRTOS_TETS_OBJECTS = \
 "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/main.c.obj" \
 "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/gpio.c.obj" \
 "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.obj" \
+"CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj" \
+"CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj" \
 "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj" \
 "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj" \
 "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj" \
 "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj" \
 "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj" \
-"CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj"
+"CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj" \
+"CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj" \
+"CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj" \
+"CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj" \
+"CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj" \
+"CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj" \
+"CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj"
 
 # External object files for target FreeRTOS_TETS
 FreeRTOS_TETS_EXTERNAL_OBJECTS = \
@@ -224,6 +344,7 @@ FreeRTOS_TETS_EXTERNAL_OBJECTS = \
 "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj" \
 "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj" \
 "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj" \
+"/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj" \
 "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/__/__/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj" \
 "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/__/__/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj" \
 "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/__/__/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj" \
@@ -238,12 +359,20 @@ FreeRTOS_TETS_EXTERNAL_OBJECTS = \
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/main.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/gpio.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.obj
+FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj
+FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_msp.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_hal_timebase_tim.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/startup_stm32f407xx.s.obj
+FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj
+FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj
+FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj
+FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj
+FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj
+FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f4xx.c.obj
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
@@ -260,6 +389,7 @@ FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj
+FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/__/__/Middlewares/Third_Party/FreeRTOS/Source/croutine.c.obj
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/__/__/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c.obj
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/__/__/Middlewares/Third_Party/FreeRTOS/Source/list.c.obj
@@ -272,7 +402,7 @@ FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/__/__/Middlewares/T
 FreeRTOS_TETS.elf: cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir/__/__/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c.obj
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/build.make
 FreeRTOS_TETS.elf: CMakeFiles/FreeRTOS_TETS.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable FreeRTOS_TETS.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking C executable FreeRTOS_TETS.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/FreeRTOS_TETS.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -37,6 +37,7 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/dma.c" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/dma.c.obj.d"
   "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/freertos.c" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/freertos.c.obj.d"
   "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/gpio.c" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/gpio.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/gpio.c.obj.d"
   "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/main.c" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/main.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/main.c.obj.d"
@@ -45,6 +46,13 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/stm32f4xx_it.c" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/stm32f4xx_it.c.obj.d"
   "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/syscalls.c" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/syscalls.c.obj.d"
   "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/sysmem.c" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/sysmem.c.obj.d"
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/Core/Src/usart.c" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/Core/Src/usart.c.obj.d"
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/app/src/sysLED_Task.c" "CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/app/src/sysLED_Task.c.obj.d"
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/app/src/systemTask.c" "CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/app/src/systemTask.c.obj.d"
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/bsp/src/led.c" "CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/bsp/src/led.c.obj.d"
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/common/src/usart_log.c" "CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/common/src/usart_log.c.obj.d"
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/middleware/src/mem_pool.c" "CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/middleware/src/mem_pool.c.obj.d"
+  "/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/FreeRTOS_TETS/middleware/src/topic_tree.c" "CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj" "gcc" "CMakeFiles/FreeRTOS_TETS.dir/middleware/src/topic_tree.c.obj.d"
   )
 
 # Targets to which this target links.
