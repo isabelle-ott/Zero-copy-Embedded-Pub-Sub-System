@@ -1,0 +1,4 @@
+Diagnostics:
+  Suppress: 
+    - "pp_file_not_found"
+    - "implicit-function-declaration"  # 把隐式声明的报错也干掉

@@ -1,0 +1,34 @@
+---
+description: FatFs、SDIO 与日志落盘规则：批量写盘、错误处理、缓冲与性能边界
+globs: {FATFS/**,Middlewares/Third_Party/FatFs/**,Core/Inc/sdio.h,Core/Src/sdio.c,common/include/SD_log.h,common/src/SD_log.c,app/include/SD_log_Task.h,app/src/SD_log_Task.c}
+alwaysApply: false
+---
+# FatFs / SDIO / Logging 规则
+
+这些文件关系到 SD 卡挂载、文件打开写入、缓冲策略和系统抖动控制。你的目标不是“能写文件就行”，而是“在实时系统里尽量低扰动地稳定写文件”。
+
+## 设计目标
+- 优先实现“异步、批量、可恢复”的日志写盘路径。
+- 把高频日志生产与低频 SDIO/FatFs 写盘解耦。
+- 为后续双缓冲日志系统保留接口，而不是把所有逻辑固化成单次同步写。
+
+## FatFs 使用规范
+- `f_mount`、`f_open`、`f_write`、`f_sync`、`f_close` 的返回值必须检查。
+- 初始化失败时，应给出清晰错误路径，避免后续继续写入未初始化文件句柄。
+- 不要假设 `bytesWritten == requested_len` 永远成立；需要关注部分写入场景。
+- 若文件长期保持打开状态，需要考虑异常恢复与重新挂载策略。
+
+## 性能与实时性
+- 不要在高频路径中每写一次就立即 `f_sync()`，除非用户明确要求强一致性。
+- 日志缓冲设计优先考虑 `Ping-Pong Buffer` 或批量块写，目标写入粒度可向 4KB 对齐靠拢。
+- 缓冲区大小、对齐和 DMA 访问限制要统一考虑，避免出现“文件系统能写、DMA 不能用”的割裂设计。
+
+## 并发与安全性
+- 若多个任务会写日志，必须有明确的串行化策略，不要直接共享 `FIL` 而无保护。
+- 文件系统调用不应在 ISR 中直接执行。
+- 若日志任务优先级较高，也仍需避免长时间占用 CPU 或阻塞关键实时任务。
+
+## 与项目规划保持一致
+- 当前阶段允许先做 MVP：挂载 + 打开 + 缓冲写入 + 条件同步。
+- 但所有新实现都应朝“系统状态订阅 -> RAM 双缓冲积累 -> 批量刷盘”的目标靠拢。
+- 若需要在 `SD_log` 与 `SD_log_Task` 之间分工，推荐：`SD_log` 负责底层写盘接口，`SD_log_Task` 负责调度、缓冲和刷盘时机。

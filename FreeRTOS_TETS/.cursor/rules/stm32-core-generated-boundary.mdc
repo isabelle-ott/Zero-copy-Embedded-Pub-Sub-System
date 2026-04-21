@@ -1,0 +1,35 @@
+---
+description: Core 与 CubeMX/HAL 相关规则：保护自动生成结构，谨慎处理中断、DMA 与外设初始化
+globs: {Core/Inc/**,Core/Src/**,Drivers/**,FreeRTOS_TETS.ioc,.mxproject,cmake/stm32cubemx/**}
+alwaysApply: false
+---
+# STM32 Core / CubeMX 边界规则
+
+这些文件通常承载启动代码、HAL 初始化、DMA/GPIO/SDIO/SPI/UART 配置、中断处理以及 CubeMX 自动生成内容。修改时必须非常保守。
+
+## 自动生成代码边界
+- 优先在 `/* USER CODE BEGIN */` / `/* USER CODE END */` 区域内扩展逻辑。
+- 除非用户明确要求或确实无法避免，不要重排 CubeMX 生成的初始化流程、函数签名或文件结构。
+- 不要手工把业务逻辑大段塞进 `main.c`；应把可复用逻辑下沉到 `app/` 或 `common/`。
+- 改动 `.ioc`、`.mxproject` 或 `cmake/stm32cubemx/` 前，先判断是否真有必要，因为这可能引起大面积再生成。
+
+## 中断与 DMA
+- ISR 里只做最小必要工作：清标志、投递通知、释放信号量、触发后续处理；不要做耗时逻辑。
+- DMA 相关缓冲区必须关注可访问内存区域、对齐、缓存一致性和生命周期。
+- 若缓冲区会被 DMA 访问，不要放在 `CCM RAM`。
+- 中断回调中若与 FreeRTOS 交互，应使用 FromISR 版本 API，并正确处理 `xHigherPriorityTaskWoken`。
+
+## HAL / BSP 风格
+- 沿用 HAL 风格命名与错误处理方式，不要无故混入另一套驱动风格。
+- 若仅为上层模块提供能力，尽量封装在独立函数中，而不是让上层直接依赖分散的 HAL 细节。
+- 外设初始化顺序改变时，要重新审视 GPIO、DMA、NVIC、外设时钟之间的依赖关系。
+
+## SPI / GPIO 握手约束
+- 与 SoC 通信的物理帧边界应由 `REQ/ACK` 或片选等硬件信号界定。
+- 设计或修改 SPI 收发状态机时，必须考虑 Linux 侧 ACK 抖动与超时重试。
+- 不要引入仅靠固定帧头字节做同步的脆弱方案。
+
+## SDIO / FatFS 接口注意事项
+- SDIO、DMA、文件系统相关改动要特别留意阻塞上下文和超时配置。
+- 不要在中断上下文直接做文件系统写操作。
+- 若要记录日志，优先通过任务或缓冲队列异步落盘。
