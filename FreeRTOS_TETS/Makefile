@@ -21,3 +21,9 @@ flash:
 
 serial:
 	picocom -b 115200 -c --omap crcrlf /dev/ttyUSB0
+
+rebuild_download:
+	make clean
+	make config
+	make build
+	make flash

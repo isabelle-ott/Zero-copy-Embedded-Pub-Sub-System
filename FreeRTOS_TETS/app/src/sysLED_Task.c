@@ -22,5 +22,6 @@ void LED_Toggle_Task(void *argument)
         tick = HAL_GetTick()-1;
         led_toggle();
         xxx_print_log_f("Tick is %d\r\n", tick);
+        xxx_print_log_f("hello world\r\n");
     }
 }
