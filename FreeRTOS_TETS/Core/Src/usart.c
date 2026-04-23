@@ -22,6 +22,32 @@
 
 /* USER CODE BEGIN 0 */
 #include "usart_log.h"
+
+#if defined(__CC_ARM) || defined(__ICCARM__) || (defined(__ARMCC_VERSION) && __ARMCC_VERSION >= 6010050)
+int fputc(int ch, FILE *f)
+{
+    // 采用轮询方式发送一个字节
+    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+    return ch;
+}
+
+// ==========================================
+// 针对 GCC (STM32CubeIDE / Makefile / CMake) 编译器的重定向
+// ==========================================
+#elif defined(__GNUC__)
+int __io_putchar(int ch)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+    return ch;
+}
+
+// GCC 下 fputc 底层最终会调用 _write，部分 GCC 版本需要重写 _write
+int _write(int file, char *ptr, int len)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)ptr, len, HAL_MAX_DELAY);
+    return len;
+}
+#endif
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;

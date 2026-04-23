@@ -20,6 +20,8 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "dma.h"
+#include "fatfs.h"
+#include "sdio.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -92,8 +94,13 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_USART1_UART_Init();
+  MX_SDIO_SD_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
-
+  for(int i=0; i<10; i++) {
+    HAL_GPIO_TogglePin(sysLED_GPIO_Port, sysLED_Pin);
+    HAL_Delay(100); // 裸机延时，不依赖 RTOS
+}
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -140,7 +147,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 4;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();

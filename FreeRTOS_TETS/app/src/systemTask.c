@@ -1,19 +1,14 @@
 #include "systemTask.h"
+#include "FreeRTOS.h"
 #include "sysLED_Task.h"
 #include "usart_log.h"
-
-#define SYSTEM_TASK_LED_STACK_WORDS   (128U)
-#define SYSTEM_TASK_LED_PRIORITY      (1U)
+#include "sd_log.h"
+#include "sys_monitor.h"
 
 StaticEventGroup_t g_systemInitEventGroupBuffer;
 EventGroupHandle_t g_systemInitEventGroup = NULL;
 
-static StaticTask_t g_ledTaskBuffer;
-static StackType_t g_ledTaskStack[SYSTEM_TASK_LED_STACK_WORDS];
-static TaskHandle_t g_ledTaskHandle = NULL;
-
 static void SystemTask_Init(void);
-static void SystemTask_CreateLedTask(void);
 
 void SystemTask_Start(void *argument)
 {
@@ -59,23 +54,15 @@ BaseType_t SystemTask_WaitInitDone(TickType_t timeoutTicks)
 
 void SystemTask_CreateTasks(void)
 {
-  SystemTask_CreateLedTask();
+  LED_Task_Start();
+  SysMonitor_Task_Start();
 }
 
-static void SystemTask_CreateLedTask(void)
-{
-  g_ledTaskHandle = xTaskCreateStatic(LED_Toggle_Task,
-                                      "LED_Toggle_Task",
-                                      SYSTEM_TASK_LED_STACK_WORDS,
-                                      NULL,
-                                      SYSTEM_TASK_LED_PRIORITY,
-                                      g_ledTaskStack,
-                                      &g_ledTaskBuffer);
-  configASSERT(g_ledTaskHandle != NULL);
-}
+
 
 static void SystemTask_Init(void)
 {
   /* 预留给后续硬件初始化、外设初始化或资源初始化 */
   __logger_print_init();
+  sd_log_init();
 }

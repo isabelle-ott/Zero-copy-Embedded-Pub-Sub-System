@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 void LED_Toggle_Task(void *argument);
+void LED_Task_Start(void);
 
 #ifdef __cplusplus
 }

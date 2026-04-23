@@ -1,0 +1,8 @@
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/test_Fatfs/build/CMakeFiles/test_Fatfs.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/test_Fatfs/build/CMakeFiles/edit_cache.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/test_Fatfs/build/CMakeFiles/rebuild_cache.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/test_Fatfs/build/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/test_Fatfs/build/cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/test_Fatfs/build/cmake/stm32cubemx/CMakeFiles/FatFs.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/test_Fatfs/build/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+/home/luka/Documents/Zero_copy_embedded_pub_or_sub_system/Zero-copy-Embedded-Pub-Sub-System/test_Fatfs/build/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
